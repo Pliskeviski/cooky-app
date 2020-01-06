@@ -1,4 +1,6 @@
 require("../app/components/molecules/logo-header/logo-header.story")
+require("../app/components/atoms/input-field/input-field.story")
+require("../app/components/atoms/horizontal-line/horizontal-line.story")
 require("../app/components/atoms/text/text.story")
 require("../app/components/atoms/button/button.story")
 require("../app/components/atoms/form-row/form-row.story")

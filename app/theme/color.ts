@@ -63,7 +63,12 @@ export const color = {
   storybookTextColor: palette.black,
 
   /**
-   * Cooky's default design color
+   * Default design color
    */
-  defaultDesignColor: palette.lighPink
+  default: palette.lighPink,
+
+  /**
+   * Button default color
+   */
+  defaultButton: palette.strongPink
 }

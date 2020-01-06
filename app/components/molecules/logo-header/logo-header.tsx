@@ -25,7 +25,7 @@ export function MoleculesLogoHeader(props: MoleculesLogoHeaderProps) {
     fontSize: 28,
     lineHeight: 39,
     textAlign: "center",
-    color: color.defaultDesignColor,
+    color: color.default,
     fontFamily: "Asap-Bold",
   }
 

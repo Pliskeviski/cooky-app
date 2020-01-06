@@ -4,7 +4,7 @@
 
 import "./i18n"
 import React, { useState, useEffect } from "react"
-import { AppRegistry, YellowBox } from "react-native"
+import { AppRegistry, YellowBox, StatusBar } from "react-native"
 import { StatefulNavigator, BackButtonHandler, exitRoutes } from "./navigation"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
 
@@ -70,6 +70,7 @@ export const App: React.FunctionComponent<{}> = () => {
   // otherwise, we're ready to render the app
   return (
     <RootStoreProvider value={rootStore}>
+      {/* <StatusBar backgroundColor="white" barStyle='dark-content' translucent={false} /> */}
       <BackButtonHandler canExit={canExit}>
         <StatefulNavigator />
       </BackButtonHandler>

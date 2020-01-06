@@ -10,10 +10,11 @@
   "errors": {
     "invalidEmail": "Invalid email address."
   },
-  "welcomeScreen": {
-    "poweredBy": "POWERED BY BOWSER",
-    "readyForLaunch": "Ready for launch.",
-    "continue": "CONTINUE"
+  "loginScreen": {
+    "createAccount": "Criar uma conta",
+    "createUsing": "Crie usando",
+    "continue": "Confirmar",
+    "or": "OU"
   },
   "demoScreen": {
     "howTo": "HOW TO",
