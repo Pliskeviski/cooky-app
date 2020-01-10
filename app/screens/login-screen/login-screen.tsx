@@ -1,23 +1,17 @@
 import * as React from "react"
 import { View, ViewStyle, TextStyle, TouchableOpacity, ImageStyle, Image, Keyboard, Alert } from "react-native"
 import { NavigationScreenProps } from "react-navigation"
-import { Button, Screen, Text, MoleculesLogoHeader, HorizontalLine, InputField } from "../../components"
+import { Button, Screen, Text, MoleculesLogoHeader, HorizontalLine, InputField, ScreenContainer } from "../../components"
 import { color, spacing } from "../../theme"
 import { BOLD, MT, FLEX, FlexRow } from "../../theme/style"
 import { Formik } from 'formik';
+import * as Yup from 'yup'
 
 const socialIcons = [
   require('../../assets/facebook.png'),
   require('../../assets/twitter.png'),
   require('../../assets/google.png'),
 ]
-
-const FULL: ViewStyle = { flex: 1 }
-
-const CONTAINER: ViewStyle = {
-  backgroundColor: color.transparent,
-  paddingHorizontal: spacing[4],
-}
 
 const TEXT: TextStyle = {
   color: color.palette.white,
@@ -95,8 +89,8 @@ export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props 
   ])
 
   return (
-    <View style={FULL}>
-      <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
+    <View style={FLEX[1]}>
+      <ScreenContainer preset="scroll">
         <View style={[MT[2]]}>
           <MoleculesLogoHeader />
           <Text style={CONTENT} tx="loginScreen.createAccount" />
@@ -130,26 +124,39 @@ export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props 
             password: '',
             passwordConfirm: '',
           }}
+          validationSchema={
+            Yup.object().shape({
+              email: Yup.string()
+                .email('Digite um e-mail válido')
+                .required('Preencha o campo de e-mail'),
+              password: Yup.string()
+                .min(6, 'A senha deve conter no mínimo 6 caracteres')
+                .required('Preencha o campo de senha'),
+              passwordConfirm: Yup.string()
+                .min(6, 'A senha deve conter no mínimo 6 caracteres')
+                .oneOf([Yup.ref('password')], 'As senhas não conferem') 
+            })
+          }
           onSubmit={values => {
-            Alert.alert(JSON.stringify(values, null, 2));
+            Alert.alert(JSON.stringify(values.email, null, 2));
             Keyboard.dismiss();
           }
           }>
-          {({ handleChange, handleSubmit, values }) => (
+          {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (
             <View>
               <View style={MT[2]}>
-                <InputField onChangeText={handleChange('email')} value={values.email} placeholder="Email" icon="envelope-o" />
-              </View>
-
-              <View style={MT[6]}>
-                <InputField onChangeText={handleChange('password')} value={values.password} placeholder="Digite sua senha" icon="lock" hideText={true} />
+                <InputField onChangeText={handleChange('email')} onBlur={handleBlur('email')} value={values.email} placeholder="Email" icon="envelope-o" error={touched.email ? errors.email : null} />
               </View>
 
               <View style={MT[2]}>
-                <InputField onChangeText={handleChange('passwordConfirm')} value={values.passwordConfirm} placeholder="Confirme sua senha" icon="lock" hideText={true} />
+                <InputField onChangeText={handleChange('password')} onBlur={handleBlur('password')} value={values.password} placeholder="Digite sua senha" icon="lock" hideText={true} error={touched.password ? errors.password : null} />
               </View>
 
-              <View style={[FOOTER, MT[5]]}>
+              <View style={MT[0]}>
+                <InputField onChangeText={handleChange('passwordConfirm')} onBlur={handleBlur('passwordConfirm')} value={values.passwordConfirm} placeholder="Confirme sua senha" icon="lock" hideText={true} error={touched.passwordConfirm ? errors.passwordConfirm : null} />
+              </View>
+
+              <View style={[FOOTER, MT[0]]}>
                 <View style={FOOTER_CONTENT}>
                   <Button
                     style={CONTINUE}
@@ -162,7 +169,7 @@ export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props 
             </View>
           )}
         </Formik>
-      </Screen>
+      </ScreenContainer>
     </View>
   )
 }

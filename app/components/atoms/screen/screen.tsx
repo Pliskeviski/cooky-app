@@ -1,8 +1,9 @@
 import * as React from "react"
-import { KeyboardAvoidingView, Platform, ScrollView, StatusBar, View } from "react-native"
+import { KeyboardAvoidingView, Platform, ScrollView, StatusBar, View, ViewStyle } from "react-native"
 import { SafeAreaView } from "react-navigation"
 import { ScreenProps } from "./screen.props"
 import { isNonScrolling, offsets, presets } from "./screen.presets"
+import { color, spacing } from "../../../theme"
 
 const isIos = Platform.OS === "ios"
 
@@ -54,10 +55,19 @@ function ScreenWithScrolling(props: ScreenProps) {
  *
  * @param props The screen props
  */
-export function Screen(props: ScreenProps) {
+export function Screen(props: ScreenProps, style?: ViewStyle) {
   if (isNonScrolling(props.preset)) {
-    return <ScreenWithoutScrolling {...props} />
+    return <ScreenWithoutScrolling style={style} {...props} />
   } else {
-    return <ScreenWithScrolling {...props} />
+    return <ScreenWithScrolling style={style} {...props} />
   }
+}
+
+const container: ViewStyle = {
+  backgroundColor: color.transparent,
+  paddingHorizontal: spacing[4],
+}
+
+export function ScreenContainer(props: ScreenProps) {
+  return Screen(props, container)
 }
