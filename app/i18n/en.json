@@ -8,13 +8,33 @@
     "name": "cooky"
   },
   "errors": {
-    "invalidEmail": "Invalid email address."
+    "invalidEmail": "Digite um e-mail válido",
+    "requiredField": "Campo obrigatório",
+    "invalidPassword": "A senha deve conter no mínimo 6 caracteres",
+    "passwordMatch": "As senhas não conferem",
+    "phoneNumber": "Número de telefone inválido"
   },
-  "loginScreen": {
+  "registerScreen": {
     "createAccount": "Criar uma conta",
     "createUsing": "Crie usando",
     "continue": "Confirmar",
-    "or": "OU"
+    "or": "OU",
+    "phoneNumberValidation": "Digite o seu número de celular para a verificação",
+    "validationCodeSent": "Um código de verificação de 4-digitos foi enviado para (41) ****-**14"
+  },
+  "loginScreen": {
+    "welcome": "Bem-vindo!",
+    "loginUsing": "Entre usando",
+    "forgotPassword": "Esqueceu sua senha?",
+    "newUser": "Novo usuário? Cadastre-se"
+  },
+  "placeholders": {
+    "email": "E-mail",
+    "typePassword": "Digite sua senha",
+    "confirmPassword": "Confirme sua senha",
+    "phone": "Digite seu número de celular",
+    "validationCodeCheck": "Digite o código de verificação",
+    "password": "Senha"
   },
   "demoScreen": {
     "howTo": "HOW TO",

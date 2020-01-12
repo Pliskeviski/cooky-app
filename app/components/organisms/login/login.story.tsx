@@ -1,16 +1,16 @@
 import * as React from "react"
 import { storiesOf } from "@storybook/react-native"
-import { LogoHeader } from "./logo-header"
-import { Story, StoryScreen, UseCase } from "../../../../storybook/views"
+import { StoryScreen, Story, UseCase } from "../../../../storybook/views"
+import { LoginPartial } from "./login"
 
 declare var module
 
-storiesOf("LogoHeader", module)
+storiesOf("Login", module)
   .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)
   .add("Style Presets", () => (
     <Story>
       <UseCase text="Primary" usage="The primary.">
-        <LogoHeader />
+        <LoginPartial />
       </UseCase>
     </Story>
   ))

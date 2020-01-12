@@ -5,7 +5,7 @@ import { color } from "../../../theme"
 
 const logoIcon = require("../../../assets/cotton_candy.png");
 
-export interface MoleculesLogoHeaderProps {
+export interface LogoHeaderProps {
   /**
    * An optional style override useful for padding & margin.
    */
@@ -17,7 +17,7 @@ export interface MoleculesLogoHeaderProps {
  *
  * Component description here for TypeScript tips.
  */
-export function MoleculesLogoHeader(props: MoleculesLogoHeaderProps) {
+export function LogoHeader(props: LogoHeaderProps) {
   // grab the props
   const { style, ...rest } = props
 

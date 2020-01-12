@@ -1,9 +1,9 @@
 import createNativeStackNavigator from "react-native-screens/createNativeStackNavigator"
-import { WelcomeScreen, DemoScreen } from "../screens"
+import { RegisterScreen, DemoScreen } from "../screens"
 
 export const PrimaryNavigator = createNativeStackNavigator(
   {
-    welcome: { screen: WelcomeScreen },
+    register: { screen: RegisterScreen },
     demo: { screen: DemoScreen },
   },
   {
@@ -18,4 +18,4 @@ export const PrimaryNavigator = createNativeStackNavigator(
  * Anything not on this list will be a standard `back` action in
  * react-navigation.
  */
-export const exitRoutes: string[] = ["welcome"]
+export const exitRoutes: string[] = ["register"]
