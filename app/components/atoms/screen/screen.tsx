@@ -88,7 +88,7 @@ export function ScreenContainerWithTopBar(props: ScreenProps) {
     <View style={FLEX[1]}>
       <TopBar />
       {Screen(props, container)}
-      { (props.bottomNavBar && <BottomBar />) }
+      { (props.bottomNavBar && <BottomBar navigation={props.navigation} />) }
     </View>
   )
 }

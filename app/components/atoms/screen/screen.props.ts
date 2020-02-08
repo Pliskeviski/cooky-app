@@ -1,7 +1,8 @@
 import { ViewStyle } from "react-native"
 import { KeyboardOffsets, ScreenPresets } from "./screen.presets"
+import { NavigationScreenProps } from "react-navigation"
 
-export interface ScreenProps {
+export interface ScreenProps extends NavigationScreenProps {
   /**
    * Children components.
    */

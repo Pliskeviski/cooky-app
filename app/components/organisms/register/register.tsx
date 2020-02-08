@@ -56,25 +56,19 @@ export const RegisterPartial: React.FunctionComponent<PartialProps> = props => {
         validationSchema={
           Yup.object().shape({
             email: Yup.string()
-            .email(translate('errors.invalidEmail'))
-            .required(translate('errors.requiredField')),
+              .email(translate('errors.invalidEmail'))
+              .required(translate('errors.requiredField')),
             password: Yup.string()
-            .min(6, translate('errors.invalidPassword'))
-            .required(translate('errors.requiredField')),
+              .min(6, translate('errors.invalidPassword'))
+              .required(translate('errors.requiredField')),
             passwordConfirm: Yup.string()
-            .oneOf([Yup.ref('password')], translate('errors.passwordMatch'))
-            .required(translate('errors.requiredField'))
+              .oneOf([Yup.ref('password')], translate('errors.passwordMatch'))
+              .required(translate('errors.requiredField'))
           })
         }
         onSubmit={values => {
           Keyboard.dismiss();
           // api
-          
-          isLoading = true;
-          setTimeout(() => {
-            isLoading = false;
-            props.submitFunction(2);
-          }, 1000);
         }
         }>
         {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (

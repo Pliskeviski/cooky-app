@@ -26,7 +26,7 @@ export const FeedScreen: React.FunctionComponent<FeedScreenProps> = observer((pr
 
   return (
     <View style={FLEX[1]}>
-      <ScreenContainerWithTopBar bottomNavBar={true} preset="scroll">
+      <ScreenContainerWithTopBar navigation={props.navigation} bottomNavBar={true} preset="scroll">
         <View style={{marginBottom: -spacing[8]}}>
           <DailyQuestion style={VIEW} />
           <SearchSection style={SEARCH} />

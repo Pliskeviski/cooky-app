@@ -4,12 +4,13 @@
 
 import "./i18n"
 import React, { useState, useEffect } from "react"
-import { AppRegistry, YellowBox, StatusBar } from "react-native"
+import { AppRegistry, YellowBox } from "react-native"
 import { StatefulNavigator, BackButtonHandler, exitRoutes } from "./navigation"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
 
 import { contains } from "ramda"
 import { enableScreens } from "react-native-screens"
+import firebase from 'react-native-firebase';
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -52,7 +53,7 @@ const canExit = (routeName: string) => contains(routeName, exitRoutes)
 export const App: React.FunctionComponent<{}> = () => {
   const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined) // prettier-ignore
   useEffect(() => {
-    setupRootStore().then(setRootStore)
+    setupRootStore().then(setRootStore);
   }, [])
 
   // Before we show the app, we have to wait for our state to be ready.

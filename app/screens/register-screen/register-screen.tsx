@@ -19,7 +19,7 @@ export const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = ({
   navigation,
 }) => {
   const initialScreenStep = React.useMemo<ScreenStep>(() => ScreenStep.Login, [])
-  const navigateToFeed = () => React.useMemo(() => navigation.navigate("feed"), [ navigation ])
+  const navigateToFeed = () => { navigation.navigate("feed"), [ navigation ]}
 
   const [currentScreenStep, setCurrentScreenStep] = React.useState<ScreenStep>(initialScreenStep)
 
@@ -33,7 +33,7 @@ export const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = ({
 
   return (
     <View style={FLEX[1]}>
-      <ScreenContainer preset="scroll">
+      <ScreenContainer navigation={navigation} preset="scroll">
         <TouchableOpacity onPress={() => { nextScreen(ScreenStep.Login) }}>
           <View style={[MT[2]]}>
             <LogoHeader />

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "786365560090",
+    "firebase_url": "https://cooky-883e6.firebaseio.com",
+    "project_id": "cooky-883e6",
+    "storage_bucket": "cooky-883e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786365560090:android:6be73377fc8a3050b2e8a3",
+        "android_client_info": {
+          "package_name": "com.cookyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786365560090-quqq1nn3gr9gv44p3ush5fqv0f8ljer4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuUCbvy8n_Nyjqq3taacbw7lTYhRSn1T8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786365560090-quqq1nn3gr9gv44p3ush5fqv0f8ljer4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

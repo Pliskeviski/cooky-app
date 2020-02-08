@@ -9,6 +9,9 @@ import { Button } from "../../atoms/button/button";
 import { PartialProps } from "../../../screens/register-screen/partial-props";
 import { LoginRegister } from "../../molecules/login-register/login-register";
 import { Text } from "../../atoms/text/text";
+import firebase from "react-native-firebase";
+import { translate } from "../../../i18n";
+import axios from 'axios';
 
 const TEXT: TextStyle = {
   color: color.palette.white,
@@ -70,22 +73,28 @@ export const LoginPartial: React.FunctionComponent<PartialProps> = props => {
         validationSchema={
           Yup.object().shape({
             email: Yup.string()
-            //  .email(translate('errors.invalidEmail'))
-            ,//  .required(translate('errors.requiredField')),
+              .email(translate('errors.invalidEmail'))
+              .required(translate('errors.requiredField')),
             password: Yup.string()
-            //  .min(6, translate('errors.invalidPassword'))
-            //  .required(translate('errors.requiredField'))
+              .min(6, translate('errors.invalidPassword'))
+              .required(translate('errors.requiredField'))
           })
         }
-        onSubmit={values => {
+        onSubmit={async (values) => {
           Keyboard.dismiss();
-          // api
-
-          isLoading = true;
-          setTimeout(() => {
-            isLoading = false;
-
-          }, 1000);
+          try {
+            isLoading = true;
+            const auth = await firebase.auth().signInWithEmailAndPassword(values.email, values.password);
+            if (auth) {
+              const user = await axios.get(`http://us-central1-cooky-883e6.cloudfunctions.net/api/profile`, {headers: { Authorization: 'Bearer ' +  await auth.user.getIdToken()} })
+              console.log(user.data);
+              if(user) {
+                props.submitFunction(2);
+              }
+            }
+          } catch (err) {
+            console.log(err);
+          }
         }
         }>
         {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (
