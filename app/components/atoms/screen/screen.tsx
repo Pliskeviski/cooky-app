@@ -4,6 +4,9 @@ import { SafeAreaView } from "react-navigation"
 import { ScreenProps } from "./screen.props"
 import { isNonScrolling, offsets, presets } from "./screen.presets"
 import { color, spacing } from "../../../theme"
+import { TopBar } from "../top-bar/top-bar"
+import { FLEX } from "../../../theme/style"
+import { BottomBar } from "../bottom-bar/bottom-bar"
 
 const isIos = Platform.OS === "ios"
 
@@ -19,7 +22,9 @@ function ScreenWithoutScrolling(props: ScreenProps) {
       behavior={isIos ? "padding" : null}
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
-      <StatusBar barStyle={props.statusBar || "light-content"} />
+      <StatusBar
+        backgroundColor={props.statusBarColor || "#FFF"}
+        barStyle={props.statusBar || "dark-content"} />
       <Wrapper style={[preset.inner, style]}>{props.children}</Wrapper>
     </KeyboardAvoidingView>
   )
@@ -37,7 +42,9 @@ function ScreenWithScrolling(props: ScreenProps) {
       behavior={isIos ? "padding" : null}
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
-      <StatusBar barStyle={props.statusBar || "light-content"} />
+      <StatusBar
+        backgroundColor={props.statusBarColor || "#FFF"}
+        barStyle={props.statusBar || "dark-content"} />
       <Wrapper style={[preset.outer, backgroundStyle]}>
         <ScrollView
           style={[preset.outer, backgroundStyle]}
@@ -69,5 +76,19 @@ const container: ViewStyle = {
 }
 
 export function ScreenContainer(props: ScreenProps) {
-  return Screen(props, container)
+  return (
+    <View style={FLEX[1]}>
+      {Screen(props, container)}
+    </View>
+  )
+}
+
+export function ScreenContainerWithTopBar(props: ScreenProps) {
+  return (
+    <View style={FLEX[1]}>
+      <TopBar />
+      {Screen(props, container)}
+      { (props.bottomNavBar && <BottomBar />) }
+    </View>
+  )
 }

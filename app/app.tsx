@@ -70,16 +70,6 @@ export const App: React.FunctionComponent<{}> = () => {
   // otherwise, we're ready to render the app
   return (
     <RootStoreProvider value={rootStore}>
-      <StatusBar barStyle="light-content"
-          // dark-content, light-content and default
-          hidden={false}
-          //To hide statusBar
-          backgroundColor="#FFF"
-          //Background color of statusBar
-          translucent={false}
-          //allowing light, but not detailed shapes
-          networkActivityIndicatorVisible={true} /> 
-      
       <BackButtonHandler canExit={canExit}>
         <StatefulNavigator />
       </BackButtonHandler>

@@ -70,7 +70,6 @@ const errorInput: TextStyle = {
 export function InputField(props: InputFieldProps) {
   // grab the props
   const { value, onChangeText, placeholder, hideText, txPlaceholder, inputType = 'default', icon, style, error, onBlur, ...rest } = props
-  const textStyle = {}
 
   return (
     <View>
@@ -96,7 +95,6 @@ export function InputField(props: InputFieldProps) {
 
 export function InputPhoneField(props: InputFieldProps) {
   const { value, onChangeText, placeholder, hideText, txPlaceholder, inputType = 'default', icon, style, error, onBlur, ...rest } = props
-  const textStyle = {}
 
   return (
     <View>

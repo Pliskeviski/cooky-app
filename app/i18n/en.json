@@ -2,7 +2,8 @@
   "common": {
     "ok": "OK!",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "see": "Ver"
   },
   "app": {
     "name": "cooky"
@@ -28,13 +29,24 @@
     "forgotPassword": "Esqueceu sua senha?",
     "newUser": "Novo usuário? Cadastre-se"
   },
+  "feedScreen": {
+    "dailyQuestion": "O que vai ser hoje?",
+    "promotions": "Promoções",
+    "seeAll": "Ver todas",
+    "nearYou": "Perto de você"
+  },
+  "listScreen": {
+    "closer": "Mais próximos",
+    "popularInArea": "Poulares na região"
+  },
   "placeholders": {
     "email": "E-mail",
     "typePassword": "Digite sua senha",
     "confirmPassword": "Confirme sua senha",
     "phone": "Digite seu número de celular",
     "validationCodeCheck": "Digite o código de verificação",
-    "password": "Senha"
+    "password": "Senha",
+    "search": "Pesquisa..."
   },
   "demoScreen": {
     "howTo": "HOW TO",

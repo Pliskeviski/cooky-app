@@ -19,6 +19,7 @@ export const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = ({
   navigation,
 }) => {
   const initialScreenStep = React.useMemo<ScreenStep>(() => ScreenStep.Login, [])
+  const navigateToFeed = () => React.useMemo(() => navigation.navigate("feed"), [ navigation ])
 
   const [currentScreenStep, setCurrentScreenStep] = React.useState<ScreenStep>(initialScreenStep)
 
@@ -29,16 +30,16 @@ export const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = ({
       screenStep: currentScreenStep
     })
   }
-  
+
   return (
     <View style={FLEX[1]}>
       <ScreenContainer preset="scroll">
-        <TouchableOpacity onPress={() => { nextScreen(ScreenStep.Register) }}>
+        <TouchableOpacity onPress={() => { nextScreen(ScreenStep.Login) }}>
           <View style={[MT[2]]}>
             <LogoHeader />
           </View>
         </TouchableOpacity>
-        {(currentScreenStep === ScreenStep.Login) && <LoginPartial submitFunction={nextScreen} />}
+        {(currentScreenStep === ScreenStep.Login) && <LoginPartial submitFunction={navigateToFeed} />}
         {(currentScreenStep === ScreenStep.Register) && <RegisterPartial submitFunction={nextScreen} />}
         {(currentScreenStep === ScreenStep.PhoneNumber) && <PhoneNumberPartial submitFunction={nextScreen} />}
         {(currentScreenStep === ScreenStep.ConfirmPhoneNumber) && <ConfirmPhoneNumberPartial submitFunction={nextScreen} />}

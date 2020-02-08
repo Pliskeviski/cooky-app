@@ -12,7 +12,7 @@ import { mergeAll, flatten } from "ramda"
  */
 export function Text(props: TextProps) {
   // grab the props
-  const { preset = "default", tx, txOptions, text, children, style: styleOverride, ...rest } = props
+  const { preset = "default", tx, txOptions, text, children, style: styleOverride, truncade, ...rest } = props
 
   // figure out which content to use
   const i18nText = tx && translate(tx, txOptions)
@@ -22,7 +22,7 @@ export function Text(props: TextProps) {
 
   return (
     <ReactNativeText {...rest} style={style}>
-      {content}
+      {(truncade && ((content.length <= truncade && content) || content.slice(0, truncade) + '...')) || content}
     </ReactNativeText>
   )
 }

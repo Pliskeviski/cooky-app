@@ -70,5 +70,20 @@ export const color = {
   /**
    * Button default color
    */
-  defaultButton: palette.strongPink
+  defaultButton: palette.strongPink,
+
+  /**
+   * Default text color
+   */
+   defaultText: palette.blackish,
+
+   /**
+    * Light default text
+    */
+   lightDefaultText: '#1D2126',
+
+   /**
+    * Text Grey
+    */
+   textGrey: '#8A8A8A'
 }

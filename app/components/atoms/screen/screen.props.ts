@@ -27,6 +27,8 @@ export interface ScreenProps {
    */
   statusBar?: "light-content" | "dark-content"
 
+  statusBarColor?: string
+
   /**
    * Should we not wrap in SafeAreaView? Defaults to false.
    */
@@ -36,4 +38,9 @@ export interface ScreenProps {
    * By how much should we offset the keyboard? Defaults to none.
    */
   keyboardOffset?: KeyboardOffsets
+
+  /**
+   * Bottom nav bar
+   */
+  bottomNavBar?: boolean
 }

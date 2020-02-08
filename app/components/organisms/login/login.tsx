@@ -4,7 +4,6 @@ import { Formik } from "formik";
 import * as Yup from 'yup'
 import { color, spacing } from "../../../theme";
 import { BOLD, MT } from "../../../theme/style";
-import { translate } from "../../../i18n";
 import { InputField } from "../../atoms/input-field/input-field";
 import { Button } from "../../atoms/button/button";
 import { PartialProps } from "../../../screens/register-screen/partial-props";
@@ -57,7 +56,7 @@ const NEW_USER: TextStyle = {
 let isLoading = false;
 export const LoginPartial: React.FunctionComponent<PartialProps> = props => {
   const passwordRecover = () => {
-    props.submitFunction(1);
+    props.submitFunction();
   }
 
   return (
@@ -71,11 +70,11 @@ export const LoginPartial: React.FunctionComponent<PartialProps> = props => {
         validationSchema={
           Yup.object().shape({
             email: Yup.string()
-              .email(translate('errors.invalidEmail'))
-              .required(translate('errors.requiredField')),
+            //  .email(translate('errors.invalidEmail'))
+            ,//  .required(translate('errors.requiredField')),
             password: Yup.string()
-              .min(6, translate('errors.invalidPassword'))
-              .required(translate('errors.requiredField'))
+            //  .min(6, translate('errors.invalidPassword'))
+            //  .required(translate('errors.requiredField'))
           })
         }
         onSubmit={values => {
