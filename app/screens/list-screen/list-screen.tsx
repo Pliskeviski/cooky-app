@@ -4,14 +4,9 @@ import { ViewStyle, View } from "react-native"
 import { ScreenContainerWithTopBar, SearchSection, LargeCardSection } from "../../components"
 import { spacing } from "../../theme"
 import { NavigationScreenProps } from "react-navigation"
-import { FLEX, MT, PT } from "../../theme/style"
+import { FLEX, MT, PT, VIEW } from "../../theme/style"
 
 export interface ListScreenProps extends NavigationScreenProps<{}> {
-}
-
-const VIEW: ViewStyle = {
-  ...MT[5],
-  left: 10,
 }
 
 const SEARCH: ViewStyle = {

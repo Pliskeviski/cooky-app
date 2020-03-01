@@ -1,5 +1,5 @@
 import * as React from "react"
-import { View, Keyboard, TextStyle, ViewStyle } from "react-native";
+import { View, Keyboard, TextStyle, ViewStyle, TouchableOpacity, AppState, Alert, AsyncStorage } from "react-native";
 import { Formik } from "formik";
 import * as Yup from 'yup'
 import { color, spacing } from "../../../theme";
@@ -12,6 +12,7 @@ import { Text } from "../../atoms/text/text";
 import firebase from "react-native-firebase";
 import { translate } from "../../../i18n";
 import axios from 'axios';
+import { ScreenStep } from "../../../screens";
 
 const TEXT: TextStyle = {
   color: color.palette.white,
@@ -56,10 +57,48 @@ const NEW_USER: TextStyle = {
   alignSelf: 'center'
 }
 
-let isLoading = false;
 export const LoginPartial: React.FunctionComponent<PartialProps> = props => {
-  const passwordRecover = () => {
-    props.submitFunction();
+
+  const initialLoading = React.useMemo<boolean>(() => false, [])
+  const [isLoading, setLoading] = React.useState<boolean>(initialLoading)
+
+
+  const newUser = () => {
+    props.submitFunction(ScreenStep.Register);
+  }
+
+  const goToFeed = () => {
+    props.submitFunction(ScreenStep.Feed);
+  }
+
+  const handleSubmit = async (values) => {
+    Keyboard.dismiss();
+    try {
+      setLoading(true);
+      const auth = await firebase.auth().signInWithEmailAndPassword(values.email, values.password);
+      if (auth) {
+        await AsyncStorage.setItem('@UserToken', await auth.user.getIdToken());
+
+        // TODO Phone Number
+        props.submitFunction(ScreenStep.Feed);
+      }
+      //if (auth) {
+      //  const user = await axios.get(`http://us-central1-cooky-883e6.cloudfunctions.net/api/profile`, { headers: { Authorization: 'Bearer ' + await auth.user.getIdToken() } })
+      //  console.log(user.data);
+      //  if (user) {
+      //    await AsyncStorage.setItem('@UserToken', await auth.user.getIdToken());
+      //    setLoading(false);
+      //    //if (auth.user.phoneNumber === null) {
+      //    //  props.submitFunction(ScreenStep.PhoneNumber);
+      //    //} else {
+      //      goToFeed();
+      //    //}
+      //  }
+      //}
+    } catch (err) {
+      setLoading(false);
+      Alert.alert(translate("commom.error"), translate("loginScreen.loginFailed"), [{ text: translate("commom.close") }]);
+    }
   }
 
   return (
@@ -81,20 +120,7 @@ export const LoginPartial: React.FunctionComponent<PartialProps> = props => {
           })
         }
         onSubmit={async (values) => {
-          Keyboard.dismiss();
-          try {
-            isLoading = true;
-            const auth = await firebase.auth().signInWithEmailAndPassword(values.email, values.password);
-            if (auth) {
-              const user = await axios.get(`http://us-central1-cooky-883e6.cloudfunctions.net/api/profile`, {headers: { Authorization: 'Bearer ' +  await auth.user.getIdToken()} })
-              console.log(user.data);
-              if(user) {
-                props.submitFunction(2);
-              }
-            }
-          } catch (err) {
-            console.log(err);
-          }
+          await handleSubmit(values);
         }
         }>
         {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (
@@ -127,9 +153,9 @@ export const LoginPartial: React.FunctionComponent<PartialProps> = props => {
               </View>
             </View>
 
-            <View style={{ marginTop: -spacing[1] }}>
-              <Text onPress={passwordRecover} style={NEW_USER} tx="loginScreen.newUser" />
-            </View>
+            <TouchableOpacity onPress={newUser} style={{ marginTop: -spacing[1] }}>
+              <Text style={NEW_USER} tx="loginScreen.newUser" />
+            </TouchableOpacity>
 
           </View>
         )}

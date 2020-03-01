@@ -8,7 +8,7 @@ import { FLEXROW, MT, FLEX } from "../../../theme/style";
 import { CardProductSm } from "../../molecules/card-product-sm/card-product-sm";
 import { useStores } from "../../../models/root-store";
 
-export interface NearYouSectionProps {
+export interface SmallCardSectionProps {
   /**
    * An optional style override useful for padding & margin.
    */
@@ -44,7 +44,7 @@ const LOCATIONICON: TextStyle = {
  *
  * Component description here for TypeScript tips.
  */
-export function NearYouSection(props: NearYouSectionProps) {
+export function SmallCardSection(props: SmallCardSectionProps) {
   // grab the props
   const { style, ...rest } = props
 

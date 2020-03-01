@@ -1,11 +1,12 @@
 import createNativeStackNavigator from "react-native-screens/createNativeStackNavigator"
-import { RegisterScreen, DemoScreen, FeedScreen, ListScreen } from "../screens"
+import { RegisterScreen, DemoScreen, FeedScreen, ListScreen, ProfileScreen } from "../screens"
 
 export const PrimaryNavigator = createNativeStackNavigator(
   {
     feed: {screen: FeedScreen},
     register: { screen: RegisterScreen },
     listScreen: { screen: ListScreen },
+    profile: { screen: ProfileScreen },
     demo: { screen: DemoScreen },
   },
   {

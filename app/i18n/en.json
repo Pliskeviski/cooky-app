@@ -3,7 +3,9 @@
     "ok": "OK!",
     "cancel": "Cancel",
     "back": "Back",
-    "see": "Ver"
+    "see": "Ver",
+    "error": "Erro",
+    "close": "Fechar"
   },
   "app": {
     "name": "cooky"
@@ -21,13 +23,14 @@
     "continue": "Confirmar",
     "or": "OU",
     "phoneNumberValidation": "Digite o seu número de celular para a verificação",
-    "validationCodeSent": "Um código de verificação de 4-digitos foi enviado para (41) ****-**14"
+    "validationCodeSent": "Um código de verificação de 4-digitos foi enviado para "
   },
   "loginScreen": {
     "welcome": "Bem-vindo!",
     "loginUsing": "Entre usando",
     "forgotPassword": "Esqueceu sua senha?",
-    "newUser": "Novo usuário? Cadastre-se"
+    "newUser": "Novo usuário? Cadastre-se",
+    "loginFailed": "E-mail ou senha incorretos"
   },
   "feedScreen": {
     "dailyQuestion": "O que vai ser hoje?",
@@ -37,7 +40,7 @@
   },
   "listScreen": {
     "closer": "Mais próximos",
-    "popularInArea": "Poulares na região"
+    "popularInArea": "Populares na região"
   },
   "placeholders": {
     "email": "E-mail",

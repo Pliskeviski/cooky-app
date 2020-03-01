@@ -6,9 +6,9 @@ import { color, spacing } from "../../../theme"
 import IconFA from 'react-native-vector-icons/FontAwesome';
 import IconFE from 'react-native-vector-icons/Feather';
 import IconFO from 'react-native-vector-icons/Fontisto';
-import { NavigationScreenProps } from "react-navigation"
+import { useStores } from "../../../models/root-store"
 
-export interface BottomBarProps extends NavigationScreenProps {
+export interface BottomBarProps {
   /**
    * Text which is looked up via i18n.
    */
@@ -56,22 +56,22 @@ export function BottomBar(props: BottomBarProps) {
   // grab the props
   const { tx, text, style, children, ...rest } = props
 
-  const login = React.useMemo(() => () => props.navigation.navigate("register"), [props.navigation]);
+  const { navigationStore } = useStores();
 
   return (
     <View style={[style, CONTAINER]} {...rest}>
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity style={MENU} >
+        <TouchableOpacity style={MENU} onPress={() => { navigationStore.navigateTo("feed") }} >
           <IconFE style={ICON} name="home" />
         </TouchableOpacity>
         <TouchableOpacity style={MENU} >
           <IconFA style={ICON} name="comment-o" />
         </TouchableOpacity>
-        <TouchableOpacity style={MENU} >
+        <TouchableOpacity style={MENU} onPress={() => { navigationStore.navigateTo("register") }} >
           <IconFO style={ICON} name="bell" />
         </TouchableOpacity>
-        <TouchableOpacity style={MENU} onPress={() => login()} >
-          <IconFA style={ICON} name="user-o" />
+        <TouchableOpacity style={MENU} >
+          <IconFA style={ICON} name="user-o" onPress={() => { navigationStore.navigateTo("profile") }} />
         </TouchableOpacity>
       </View>
       {children}

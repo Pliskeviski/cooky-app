@@ -1,4 +1,5 @@
 export interface PartialProps {
-    submitFunction?,
+    submitFunction?
+    phoneNumber?: string
 }
   

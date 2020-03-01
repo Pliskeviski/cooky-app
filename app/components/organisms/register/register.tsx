@@ -1,5 +1,5 @@
 import * as React from "react"
-import { View, Keyboard, TextStyle, ViewStyle } from "react-native";
+import { View, Keyboard, TextStyle, ViewStyle, Alert } from "react-native";
 import { Formik } from "formik";
 import * as Yup from 'yup'
 import { color, spacing } from "../../../theme";
@@ -9,6 +9,9 @@ import { InputField } from "../../atoms/input-field/input-field";
 import { Button } from "../../atoms/button/button";
 import { PartialProps } from "../../../screens/register-screen/partial-props";
 import { LoginRegister } from "../../molecules/login-register/login-register";
+import firebase from "react-native-firebase";
+import { ScreenStep } from "../../../screens";
+import { AsyncStorage } from 'react-native';
 
 const TEXT: TextStyle = {
   color: color.palette.white,
@@ -42,8 +45,10 @@ const FOOTER_CONTENT: ViewStyle = {
   backgroundColor: color.transparent
 }
 
-let isLoading = false;
 export const RegisterPartial: React.FunctionComponent<PartialProps> = props => {
+  const initialLoading = React.useMemo<boolean>(() => false, [])
+  const [isLoading, setLoading] = React.useState<boolean>(initialLoading)
+
   return (
     <View>
       <LoginRegister txLarge="registerScreen.createAccount" txSmall="registerScreen.createUsing" />
@@ -66,9 +71,24 @@ export const RegisterPartial: React.FunctionComponent<PartialProps> = props => {
               .required(translate('errors.requiredField'))
           })
         }
-        onSubmit={values => {
+        onSubmit={async (values) => {
           Keyboard.dismiss();
-          // api
+          setLoading(true);
+          try {
+            const auth = await firebase.auth().createUserWithEmailAndPassword(values.email, values.passwordConfirm);
+            console.log(auth);
+            setLoading(false);
+            if (auth) {
+              await AsyncStorage.setItem('@UserToken', await auth.user.getIdToken());
+
+              // TODO Phone Number
+              props.submitFunction(ScreenStep.Feed);
+            }
+          } catch (err) {
+            console.log(err);
+            setLoading(false);
+            Alert.alert(translate("common.error"), err.message, [{ text: translate("common.close") }]);
+          }
         }
         }>
         {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (

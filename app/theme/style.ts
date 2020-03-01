@@ -99,3 +99,8 @@ export const FLEXROW: ViewStyle = {
     display: "flex",
     flexDirection: "row"
 }
+
+export const VIEW: ViewStyle = {
+    ...MT[5],
+    left: 10,
+}

@@ -10,105 +10,116 @@ import { Button } from "../../atoms/button/button";
 import { MT, BOLD } from "../../../theme/style";
 import { PartialProps } from "../../../screens/register-screen/partial-props";
 import { ScreenStep } from "../../../screens";
-  
+import firebase from "react-native-firebase";
+
 const TEXT: TextStyle = {
   color: color.palette.white,
   fontFamily: "Poppins-Regular",
 }
 
 const CONTENT: TextStyle = {
-    fontFamily: 'Ubuntu-Bold',
-    color: color.default,
-    fontSize: 22,
-    textAlign: "center",
-    marginTop: spacing[6]
-  }
-  
-  const CONTENT_SM: TextStyle = {
-    fontFamily: 'Ubuntu-Regular',
-    color: color.default,
-    fontSize: 14,
-    textAlign: "center",
-    marginTop: spacing[5],
-    width: '70%',
-    alignSelf: 'center'
-  }
-  
-  const CONTINUE: ViewStyle = {
-    paddingVertical: spacing[4],
-    paddingHorizontal: spacing[4],
-    backgroundColor: color.defaultButton,
-    borderRadius: 40,
-    elevation: 8,
-    shadowColor: 'rgba(200, 0, 0, 1)',
-    shadowOpacity: 0.8,
-    shadowRadius: 15,
-    shadowOffset: { width: 1, height: 13 },
-  }
-  const CONTINUE_TEXT: TextStyle = {
-    ...TEXT,
-    ...BOLD,
-    fontSize: 16,
-    letterSpacing: 1,
-    fontFamily: 'Poppins-Regular'
-  }
-  const FOOTER: ViewStyle = {
-    backgroundColor: color.transparent,
-  }
-  const FOOTER_CONTENT: ViewStyle = {
-    paddingVertical: spacing[4],
-    paddingHorizontal: spacing[4],
-    backgroundColor: color.transparent
-  }
-  
+  fontFamily: 'Ubuntu-Bold',
+  color: color.default,
+  fontSize: 22,
+  textAlign: "center",
+  marginTop: spacing[6]
+}
+
+const CONTENT_SM: TextStyle = {
+  fontFamily: 'Ubuntu-Regular',
+  color: color.default,
+  fontSize: 14,
+  textAlign: "center",
+  marginTop: spacing[5],
+  width: '70%',
+  alignSelf: 'center'
+}
+
+const CONTINUE: ViewStyle = {
+  paddingVertical: spacing[4],
+  paddingHorizontal: spacing[4],
+  backgroundColor: color.defaultButton,
+  borderRadius: 40,
+  elevation: 8,
+  shadowColor: 'rgba(200, 0, 0, 1)',
+  shadowOpacity: 0.8,
+  shadowRadius: 15,
+  shadowOffset: { width: 1, height: 13 },
+}
+const CONTINUE_TEXT: TextStyle = {
+  ...TEXT,
+  ...BOLD,
+  fontSize: 16,
+  letterSpacing: 1,
+  fontFamily: 'Poppins-Regular'
+}
+const FOOTER: ViewStyle = {
+  backgroundColor: color.transparent,
+}
+const FOOTER_CONTENT: ViewStyle = {
+  paddingVertical: spacing[4],
+  paddingHorizontal: spacing[4],
+  backgroundColor: color.transparent
+}
+
 
 export const ConfirmPhoneNumberPartial: React.FunctionComponent<PartialProps> = props => {
-    return (
-        <View>
-          <Text style={CONTENT} tx="registerScreen.createAccount" />
-          <Text style={CONTENT_SM} tx="registerScreen.validationCodeSent" />
+  return (
+    <View>
+      <Text style={CONTENT} tx="registerScreen.createAccount" />
+      <Text style={CONTENT_SM}>
+        {translate("registerScreen.validationCodeSent")}
+      </Text>
 
-          <Formik
-            initialValues={{
-              phone: '',
-            }}
-            validationSchema={
-              Yup.object().shape({
-                phone: Yup.string()
-                  .required(translate('errors.requiredField')),
-              })
+      <Formik
+        initialValues={{
+          code: '',
+        }}
+        validationSchema={
+          Yup.object().shape({
+            code: Yup.string()
+              .required(translate('errors.requiredField')),
+          })
+        }
+        onSubmit={async (values) => {
+          Keyboard.dismiss();
+          // api
+          try {
+            var user = firebase.auth().currentUser;
+            if (user !== null) {
+              firebase.auth().checkActionCode(values.code);
+              //props.submitFunction(ScreenStep.Register);
             }
-            onSubmit={values => {
-              Keyboard.dismiss();
-              // api
-              props.submitFunction(ScreenStep.Register);
-            }
-            }>
-            {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (
-              <View>
-                <View style={MT[2]}>
-                  <InputField onChangeText={handleChange('phone')} 
-                    onBlur={handleBlur('phone')}
-                    value={values.phone}
-                    txPlaceholder={'placeholders.validationCodeCheck'} 
-                    icon="lock"
-                    error={touched.phone ? errors.phone : null}
-                    inputType="numeric" />
-                </View>
+          } catch(err) {
+            console.log(err.message);
+          }
+        }
+        }>
+        {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (
+          <View>
+            <View style={MT[2]}>
+              <InputField onChangeText={handleChange('code')}
+                onBlur={handleBlur('code')}
+                value={values.code}
+                txPlaceholder={'placeholders.validationCodeCheck'}
+                icon="lock"
+                error={touched.code ? errors.code : null}
+                inputType="numeric" />
+            </View>
 
-                <View style={[FOOTER, MT[0]]}>
-                  <View style={FOOTER_CONTENT}>
-                    <Button
-                      style={CONTINUE}
-                      textStyle={CONTINUE_TEXT}
-                      tx="registerScreen.continue"
-                      onPress={handleSubmit}
-                    />
-                  </View>
-                </View>
+            <View style={[FOOTER, MT[0]]}>
+              <View style={FOOTER_CONTENT}>
+                <Button
+                  style={CONTINUE}
+                  textStyle={CONTINUE_TEXT}
+                  tx="registerScreen.continue"
+                  onPress={handleSubmit}
+                />
               </View>
-            )}
-          </Formik>
-        </View>
-    )
+            </View>
+          </View>
+        )}
+      </Formik>
+    </View>
+  )
 }

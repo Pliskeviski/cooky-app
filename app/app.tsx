@@ -4,7 +4,7 @@
 
 import "./i18n"
 import React, { useState, useEffect } from "react"
-import { AppRegistry, YellowBox } from "react-native"
+import { AppRegistry, YellowBox, NativeModules, Platform } from "react-native"
 import { StatefulNavigator, BackButtonHandler, exitRoutes } from "./navigation"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
 
@@ -54,6 +54,7 @@ export const App: React.FunctionComponent<{}> = () => {
   const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined) // prettier-ignore
   useEffect(() => {
     setupRootStore().then(setRootStore);
+    firebase.auth().languageCode = Platform.OS === "ios" ? NativeModules.SettingsManager.settings.AppleLocale : NativeModules.I18nManager.localeIdentifier;
   }, [])
 
   // Before we show the app, we have to wait for our state to be ready.

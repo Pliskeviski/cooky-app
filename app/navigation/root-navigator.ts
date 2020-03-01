@@ -7,6 +7,6 @@ export const RootNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
-    navigationOptions: { gesturesEnabled: false },
+    navigationOptions: { gesturesEnabled: false }    
   },
 )

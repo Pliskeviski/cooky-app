@@ -10,7 +10,7 @@ storiesOf("BottomBar", module)
   .add("Style Presets", () => (
     <Story>
       <UseCase text="Primary" usage="The primary.">
-        <BottomBar text="BottomBar" />
+        <BottomBar navigation={null} />
       </UseCase>
     </Story>
   ))

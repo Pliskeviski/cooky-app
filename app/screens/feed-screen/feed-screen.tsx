@@ -1,6 +1,6 @@
 import * as React from "react"
 import { View, ViewStyle } from "react-native"
-import { ScreenContainerWithTopBar, DailyQuestion, LargeCardSection, NearYouSection } from "../../components"
+import { ScreenContainerWithTopBar, DailyQuestion, LargeCardSection, SmallCardSection } from "../../components"
 import { NavigationScreenProps } from "react-navigation"
 import { FLEX, MT } from "../../theme/style"
 import { observer } from "mobx-react-lite"
@@ -23,15 +23,15 @@ const SEARCH: ViewStyle = {
 
 export const FeedScreen: React.FunctionComponent<FeedScreenProps> = observer((props) => {
   const viewMore = React.useMemo(() => () => props.navigation.navigate("listScreen"), [props.navigation]);
-
+  
   return (
     <View style={FLEX[1]}>
-      <ScreenContainerWithTopBar navigation={props.navigation} bottomNavBar={true} preset="scroll">
+      <ScreenContainerWithTopBar bottomNavBar={true} preset="scroll">
         <View style={{marginBottom: -spacing[8]}}>
           <DailyQuestion style={VIEW} />
           <SearchSection style={SEARCH} />
           <LargeCardSection showMore={true} tx="feedScreen.promotions" viewMoreFunction={viewMore} style={VIEW} />
-          <NearYouSection viewMoreFunction={viewMore} style={VIEW} />
+          <SmallCardSection viewMoreFunction={viewMore} style={VIEW} />
         </View>
       </ScreenContainerWithTopBar>
     </View>
