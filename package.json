@@ -28,7 +28,7 @@
     "@paraboly/react-native-card": "^0.2.13",
     "@react-native-community/async-storage": "^1.5.1",
     "apisauce": "1.0.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "css-tree": "^1.0.0-alpha.39",
     "formik": "^2.1.1",
     "i18n-js": "^3.0.11",
